@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: docker login
+      run: docker login -u luc041202 -p dckr_pat_sFMLNIZP8DELQpRDaD_z7QR32v0
+    - name: build image
+      run: docker build -t luc041202/study-api-docker .
+    - name: push to docker
+      run: docker push luc041202/study-api-docker
